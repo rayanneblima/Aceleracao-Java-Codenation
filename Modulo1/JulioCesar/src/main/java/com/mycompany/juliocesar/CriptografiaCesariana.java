@@ -1,59 +1,82 @@
 package com.mycompany.juliocesar;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
-public class CriptografiaCesariana implements Criptografia {    
+public class CriptografiaCesariana {
     
-    @Override
-    public String criptografar(String texto) {
+    public static void main(String[] args) {
+        System.out.println("Digite o texto: ");
+        Scanner scanner = new Scanner(System.in);
+        String texto = scanner.nextLine();
+        //criptografar(texto);
+        //descriptografar(texto);
+    }
+    
+    //@Override
+    public static String criptografar(String texto) {
         char[] alfabeto = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
     'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
         int chave = 3;
         
-        char[] letras = texto.toCharArray();
-        char[] msgcripto = new char[letras.length];
+        if (texto.isEmpty()) {
+            throw new IllegalArgumentException();
+	} if (texto == null) {
+            throw new NullPointerException();
+	}
         
-        for (int i = 0; i < letras.length; i++) {
-            if (letras[i] == ' '){
-                msgcripto[i] = letras[i];
+        texto = texto.toLowerCase();
+        char[] msgcriptoArray = new char[texto.length()];
+ 
+        for (int i = 0; i < texto.length(); i++) {
+            if (!Character.isAlphabetic(texto.charAt(i))){
+                msgcriptoArray[i] = texto.charAt(i);
             } else {
                 for (int j = 0; j < alfabeto.length ; j++) {
-                    if (letras[i] == alfabeto[j]) {
-                        msgcripto[i] = alfabeto[(j+chave)%alfabeto.length];
+                    if (texto.charAt(i) == alfabeto[j]) {
+                        msgcriptoArray[i] = alfabeto[(j+chave)%alfabeto.length];
                     }
                 }
             }
                
         }
-        return Arrays.toString(msgcripto); 
+        String msgcripto = new String(msgcriptoArray);
+        return msgcripto; 
     }
 
-    @Override
-    public String descriptografar(String texto) {
+    //@Override
+    public static String descriptografar(String texto) {
         char[] alfabeto = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
     'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
         int chave = 3;
         
-        char[] letras = texto.toCharArray();
-        char[] msgcripto = new char[letras.length];
+        if (texto.isEmpty()) {
+            throw new IllegalArgumentException();
+	} if (texto == null) {
+            throw new NullPointerException();
+	}
         
-        for (int i = 0; i < letras.length; i++) {
-            if (letras[i] == ' '){
-                msgcripto[i] = letras[i];
+        texto = texto.toLowerCase();
+        char[] msgcriptoArray = new char[texto.length()];
+        
+        for (int i = 0; i < texto.length(); i++) {
+            if (!Character.isAlphabetic(texto.charAt(i))){
+                msgcriptoArray[i] = texto.charAt(i);
             } else {
                 for (int j = 0; j < alfabeto.length ; j++) {
-                    if (letras[i] == alfabeto[j]) {
+                    if (texto.charAt(i) == alfabeto[j]) {
                         if (j < chave) {
-                            msgcripto[i] = alfabeto[j-chave+alfabeto.length];    
+                            msgcriptoArray[i] = alfabeto[j-chave+alfabeto.length];    
                         } else {
-                            msgcripto[i] = alfabeto[j-chave];
+                            msgcriptoArray[i] = alfabeto[j-chave];
                         }
                     } 
                 }
             }
                
         }
-        return Arrays.toString(msgcripto);
+        String msgcripto = new String(msgcriptoArray);
+        return msgcripto;
     }
     
 }
