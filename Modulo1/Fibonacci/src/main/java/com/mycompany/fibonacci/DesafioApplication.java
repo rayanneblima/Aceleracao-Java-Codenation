@@ -6,8 +6,8 @@ import java.util.List;
 public class DesafioApplication {
 
     public static void main(String[] args) {
-        System.out.println(listaFibonacci());
-        System.out.println(isFibonacci(3));
+        //System.out.println(listaFibonacci());
+        //System.out.println(isFibonacci(3));
     }
 
     //@Desafio("Fibonacci")
@@ -23,7 +23,8 @@ public class DesafioApplication {
 
             elemento = fibonacci.get(i-1) + fibonacci.get(i-2);
 
-            if(elemento >= 350) {
+            if(elemento > 350) {
+                fibonacci.add(elemento);
                 break;
             }
 
